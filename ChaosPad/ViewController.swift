@@ -33,12 +33,13 @@ class ViewController: UIViewController {
         device = alcOpenDevice(nil)
         context = alcCreateContext(device, nil)
         alcMakeContextCurrent(context)
-        alGenBuffers(1, &buffer)
     }
     
     @IBAction func play() {
         var buffer: ALuint = 0
+        alGenBuffers(1, &buffer)
         var source: ALuint = 0
+        let x = 0..<samplingRate
         let data: [ALshort] = (0..<samplingRate).map({ ALshort(sin(Double($0) * 3.14159 * 2 * 440 / samplingRate) * 32767) })
         alBufferData(buffer, AL_FORMAT_MONO16, data, ALsizei(sizeof(ALshort) * data.count), samplingRate)
         alGenSources(1, &source)
