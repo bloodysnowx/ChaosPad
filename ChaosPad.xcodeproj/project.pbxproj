@@ -14,6 +14,7 @@
 		EC7DC5EC1CD1E7F300F3C575 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC7DC5EA1CD1E7F300F3C575 /* LaunchScreen.storyboard */; };
 		EC7DC5F41CD1E83C00F3C575 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC7DC5F31CD1E83C00F3C575 /* OpenAL.framework */; };
 		EC7DC5F61CD1E84500F3C575 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC7DC5F51CD1E84500F3C575 /* AudioToolbox.framework */; };
+		ECB021E31CD720E400BB61DF /* ChaosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB021E21CD720E400BB61DF /* ChaosView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		EC7DC5ED1CD1E7F300F3C575 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EC7DC5F31CD1E83C00F3C575 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		EC7DC5F51CD1E84500F3C575 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		ECB021E21CD720E400BB61DF /* ChaosView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChaosView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 				EC7DC5E81CD1E7F300F3C575 /* Assets.xcassets */,
 				EC7DC5EA1CD1E7F300F3C575 /* LaunchScreen.storyboard */,
 				EC7DC5ED1CD1E7F300F3C575 /* Info.plist */,
+				ECB021E21CD720E400BB61DF /* ChaosView.swift */,
 			);
 			path = ChaosPad;
 			sourceTree = "<group>";
@@ -111,6 +114,7 @@
 				TargetAttributes = {
 					EC7DC5DD1CD1E7F300F3C575 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = BGN46LJSBB;
 					};
 				};
 			};
@@ -150,6 +154,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECB021E31CD720E400BB61DF /* ChaosView.swift in Sources */,
 				EC7DC5E41CD1E7F300F3C575 /* ViewController.swift in Sources */,
 				EC7DC5E21CD1E7F300F3C575 /* AppDelegate.swift in Sources */,
 			);
