@@ -91,7 +91,7 @@ class ViewController: UIViewController {
     
     private func play(touch: UITouch) {
         guard touch.type == UITouchType.Stylus else { return }
-        play(touch.locationInView(nil).y * 10,
+        play(touch.locationInView(nil).y * 3,
              sine: touch.altitudeAngle / CGFloat(0.5 * pi) * 8192,
              square: touch.azimuthAngleInView(nil) / CGFloat(2 * pi) * 8192,
              triangle: touch.force / touch.maximumPossibleForce * 8192,
@@ -104,16 +104,29 @@ class ViewController: UIViewController {
     }
     
     private func play(frequency: CGFloat, sine: CGFloat, square: CGFloat, triangle: CGFloat, sawtooth: CGFloat) {
-        let count: ALuint = 0
-        var buffers: [ALuint] = [ALuint](count: 1, repeatedValue: count)
+        var buffers: [ALuint] = [ALuint](count: 1, repeatedValue: 0)
         alGenBuffers(1, &buffers)
         var source: ALuint = 0
         
-        let data: [ALshort] = (0..<samplingRate).map { hoge($0, frequency: frequency, sine: sine, square: square, triangle: triangle, sawtooth: sawtooth) }
+        let data: [ALshort] = createWave(frequency, sine: sine, square: square, triangle: triangle, sawtooth: sawtooth)
         alBufferData(buffers[0], AL_FORMAT_MONO16, data, ALsizei(sizeof(ALshort) * data.count), samplingRate)
         alGenSources(1, &source)
         alSourcei(source, AL_BUFFER, ALint(buffers[0]))
         alSourcePlay(source)
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (Int64)(NSEC_PER_SEC) / 5), dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
+            alSourceStop(source)
+            alDeleteSources(1, &source)
+            alDeleteBuffers(1, &buffers)
+        }
+    }
+    
+    private func createWave(frequency: CGFloat, sine: CGFloat, square: CGFloat, triangle: CGFloat, sawtooth: CGFloat) -> [ALshort] {
+        if sine > 8192 * 4 / 5 { return (0..<samplingRate).map { self.sine($0, frequency: frequency, amp: sine * 4) } }
+        if square > 8192 * 4 / 5 { return (0..<samplingRate).map { self.square($0, frequency: frequency, amp: square * 4) } }
+        if triangle > 8192 * 4 / 5 { return (0..<samplingRate).map { self.triangle($0, frequency: frequency, amp: triangle * 4) } }
+        if sawtooth > 8192 * 4 / 5 { return (0..<samplingRate).map { self.sawtooth($0, frequency: frequency, amp: sawtooth * 4) } }
+        return (0..<samplingRate).map { hoge($0, frequency: frequency, sine: sine, square: square, triangle: triangle, sawtooth: sawtooth) }
     }
 }
 
